@@ -12,9 +12,7 @@ RUN useradd -m  kafka_user
 RUN echo "kafka_user:kafka" | chpasswd
 
 USER kafka_user
-
 WORKDIR /home/kafka_user
-# password
 
 RUN wget https://dlcdn.apache.org/kafka/3.7.2/kafka_2.13-3.7.2.tgz
 RUN tar -xzf kafka_2.13-3.7.2.tgz
