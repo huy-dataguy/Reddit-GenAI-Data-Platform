@@ -3,7 +3,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.types import *
 from pyspark.sql.functions import *
 
-from transformer.submissionTransfomer import SubmissionTransformer
+from transformer.submissionTransformer import SubmissionTransformer
 
 spark = (SparkSession.builder
         .appName("SilverTransformer")

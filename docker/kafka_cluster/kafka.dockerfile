@@ -34,7 +34,7 @@ ENV KAFKA_CLUSTER_ID=Q_6ATv-PTJGaFkf27OW8Bg
 
 
 COPY config/kafka_cluster/entrypoint.sh entrypoint.sh
-USER root
+ USER root
 WORKDIR /home/kafka_user
 RUN dos2unix entrypoint.sh
 RUN chmod +x entrypoint.sh
