@@ -3,6 +3,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.types import *
 from pyspark.sql.functions import *
 
+from transformer.commentTransformer import CommentTransformer
 from transformer.submissionTransformer import SubmissionTransformer
 
 spark = (SparkSession.builder
@@ -21,6 +22,9 @@ spark = (SparkSession.builder
         .config("spark.hadoop.fs.s3a.connection.ssl.enabled", "false")
         .config("spark.hadoop.fs.s3a.aws.credentials.provider", "org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider")
         .getOrCreate())
+
+commentTransformer = CommentTransformer(spark)
+commentTransformer.transform("spark_catalog.bronze.reddit_comment", "spark_catalog.silver.reddit_comment", checkpointPath="s3a://checkpoint/lakehouse/silver/reddit_comment/")
 
 submissionTransformer = SubmissionTransformer(spark)
 submissionTransformer.transform("spark_catalog.bronze.reddit_submission", "spark_catalog.silver.reddit_submission", checkpointPath="s3a://checkpoint/lakehouse/silver/reddit_submission/")
